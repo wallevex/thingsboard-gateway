@@ -66,6 +66,11 @@
       "type": "mqtt",
       "name": "MQTT-A",
       "configuration": "mqttA.json"
+    },
+    {
+      "type": "mqtt",
+      "name": "MQTT-A",
+      "configuration": "mqttA.json"
     }
   ]
 }

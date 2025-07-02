@@ -11,7 +11,9 @@
 #     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
+import ast
 import datetime
+import json
 from getpass import getuser
 from logging import getLogger, setLoggerClass
 from os import environ
@@ -227,6 +229,8 @@ class TBUtility:
                 return float(evaluated_data)
             elif 'bool' in new_type:
                 return TBUtility.str_to_bool(evaluated_data)
+            elif 'json' in new_type:
+                return ast.literal_eval(evaluated_data)
             else:
                 return str(evaluated_data)
         except ValueError:
@@ -371,7 +375,7 @@ class TBUtility:
             except Exception as e:
                 logger.debug("Error while parsing timestamp %s: %s with configured tsField: %s",
                              ts_field_key, e, config['tsField'])
-        return data.get('ts', data.get('timestamp')) if default_ts else None
+        return data.get('time', data.get('timestamp')) if default_ts else None
 
     @staticmethod
     def get_service_environmental_variables():
